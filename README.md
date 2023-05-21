@@ -28,6 +28,7 @@ https://weathershield.netlify.app
 Users can get rain alert notification before its about to rain when rain is forecasted in their location.
 To enable this users will have to create an account by registering then signing in and then by enabling the notifications from the settings menu.
 ,they can also turn off notification anytime they want.
+
 Users can also change their location if they want from the settings menu.
 
 
