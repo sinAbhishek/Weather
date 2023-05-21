@@ -1,0 +1,267 @@
+.main {
+}
+.curr {
+  margin: 0 auto;
+}
+.hourly {
+  margin: 0rem 0 0.2rem;
+}
+.hourlyCont {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  overflow: auto;
+
+  height: max-content;
+}
+.hourlyCont::-webkit-scrollbar {
+  height: 0.8rem;
+}
+.hourlyCont::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 7, 115);
+  border-radius: 1rem;
+}
+.hourlyCont::-webkit-scrollbar-track {
+  background-color: rgb(83, 165, 228);
+}
+
+.navbar {
+  height: 4rem;
+  background-color: rgb(108, 229, 245);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  width: 20%;
+}
+.navbar img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+}
+.navbar > .searchBar {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.sm-search {
+  display: none;
+  justify-content: center;
+}
+.sm-search > .sm-searchBar {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+body {
+  margin: 0px;
+  background-color: rgb(255, 255, 255);
+}
+.userDetails {
+  width: 20%;
+}
+.searchBar input {
+  height: 1rem;
+  border-radius: 2rem;
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+.searchBar button {
+  position: absolute;
+  right: 0px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: rgb(94, 105, 234);
+  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.searchBar button:hover {
+  background-color: rgb(62, 184, 240);
+  transition: 0.5s;
+}
+.sm-searchBar input {
+  height: 1rem;
+  border-radius: 2rem;
+  width: 100%;
+
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+.sm-searchBar button {
+  position: absolute;
+  right: 0px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: rgb(94, 105, 234);
+  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.sm-searchBar button:hover {
+  background-color: rgb(62, 184, 240);
+  transition: 0.5s;
+}
+.bar {
+  height: 3rem;
+  width: 100%;
+  background-color: rgb(26, 78, 222);
+  text-align: center;
+}
+.bar > h3 {
+  margin: 0px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: lighter;
+  font-size: 1.5rem;
+  color: rgb(205, 251, 205);
+}
+.userDetails {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+}
+.setting {
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 100%;
+  right: 5rem;
+  width: 300px;
+  height: max-content;
+  background-color: rgb(249, 96, 173);
+  opacity: 1;
+  transition: 0.3s ease-in-out;
+  z-index: 1;
+}
+.arrowDown:hover {
+  cursor: pointer;
+}
+.hidesetting {
+  right: 5rem;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  height: max-content;
+  background-color: aquamarine;
+  transition: 0.3s ease-in-out;
+  opacity: 0;
+}
+.toggleNotif {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  justify-content: center;
+  margin: 0.2rem auto;
+  z-index: 1;
+}
+.userProfile {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userProfile > h3 {
+  color: rgb(7, 59, 161);
+}
+.togBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.locate {
+  display: flex;
+  justify-content: center;
+}
+.locateBtn {
+  width: 8rem;
+  height: 2rem;
+  border-radius: 0.8rem;
+  background-color: black;
+  color: white;
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loadAnim {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.togBtn > h4 {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+}
+.Login {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem;
+}
+.Login > button:hover {
+  cursor: pointer;
+}
+.Login > button {
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.875);
+  color: white;
+  border: none;
+
+  border-radius: 0.5rem;
+  font-family: "Lora", serif;
+  font-size: 1rem;
+}
+.Login > button:hover {
+  cursor: pointer;
+}
+.arrowDown {
+  margin-left: 1rem;
+  margin-right: 0.3rem;
+}
+.logOut {
+  background-color: black;
+  padding: 0.2rem;
+  color: white;
+  width: max-content;
+  margin: 1rem auto 0rem;
+  border-radius: 0.2rem;
+}
+.locateBtn:hover {
+  cursor: pointer;
+}
+.logOut:hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .userDetails {
+    margin-right: 1rem;
+  }
+  .usr {
+    display: none;
+  }
+  .sm-search {
+    display: flex;
+    margin: 1rem 0;
+  }
+  .searchBar {
+    display: none !important;
+  }
+  .sm-searchBar {
+    width: 60% !important;
+  }
+  .setting {
+    right: 1rem;
+  }
+}

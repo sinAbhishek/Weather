@@ -1,0 +1,29 @@
+.slidericon {
+  background-color: rgb(17, 173, 220);
+  height: 100%;
+
+  border-radius: 0.1rem;
+  margin: 0 0.1rem;
+}
+.hourlyWrapper {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 1rem;
+}
+.iconT {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iconT > p {
+  color: white;
+  font-size: 1rem;
+}
+.hourlyWrapper > p {
+  font-style: italic;
+  font-size: 1rem;
+}

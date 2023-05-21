@@ -1,0 +1,51 @@
+.dailyWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(62, 87, 232);
+  margin-bottom: 0.4rem;
+}
+.icnDes {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.icnDes > p {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: black;
+}
+.date {
+  width: 30%;
+}
+.date > p {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+}
+.right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+.right > h3 {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+}
+hr {
+  height: 0.2rem;
+  border: none;
+}
+@media only screen and (max-width: 450px) {
+  .date {
+    width: 20%;
+  }
+  .right > h3 {
+    font-size: 0.86rem;
+  }
+}

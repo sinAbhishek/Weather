@@ -1,0 +1,94 @@
+.currentWrapper {
+  display: flex;
+  width: 70%;
+  height: 300px;
+  justify-content: center;
+  margin: 0rem auto;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.icon,
+.main-des {
+}
+.bg-img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  z-index: -1;
+  opacity: 90%;
+  border-radius: 0.5rem;
+  background-position: top;
+}
+.temp > h2,
+h5 {
+  color: white;
+  font-family: "Lora", serif;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.icon > h2,
+p {
+  margin: 0;
+  color: rgb(20, 76, 197);
+  font-family: "Lora", serif;
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+.icon > h2 {
+  color: rgb(39, 172, 233);
+
+  font-weight: bold;
+}
+.icon > p {
+  font-style: italic;
+}
+.icon {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem;
+}
+.temp {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  justify-content: flex-start;
+}
+h5 > p {
+}
+.main-des > h5 {
+  font-size: 1rem;
+  display: inline;
+  margin: 0.3rem 0;
+  font-weight: normal;
+}
+.temp p {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+  font-weight: normal;
+  display: inline;
+}
+.main-des {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.main-des p {
+  color: white;
+}
+@media only screen and (max-width: 800px) {
+  .currentWrapper {
+    width: 85%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .currentWrapper {
+    width: 100%;
+  }
+}
