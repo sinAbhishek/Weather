@@ -43,7 +43,7 @@ Users can also search for different cities and get their weather data.
 
 # RunLocally
 ```bash
-  git clone https://github.com/sinAbhishek/ChatApp.git
+  git clone https://github.com/sinAbhishek/Weather.git
 ```
 
 Go to the root directory
