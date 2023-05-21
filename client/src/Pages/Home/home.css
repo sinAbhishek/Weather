@@ -137,13 +137,16 @@ body {
   right: 5rem;
   width: 300px;
   height: max-content;
-  background-color: rgb(249, 96, 173);
+  background-color: rgb(78, 76, 77);
   opacity: 1;
   transition: 0.3s ease-in-out;
   z-index: 1;
 }
 .arrowDown:hover {
   cursor: pointer;
+}
+.togBtn > h4 {
+  color: white;
 }
 .hidesetting {
   right: 5rem;

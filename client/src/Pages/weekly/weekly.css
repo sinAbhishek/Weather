@@ -12,14 +12,23 @@
   justify-content: center;
   text-align: center;
 }
-.icnDes > p {
+.md-wthr > p {
   font-family: "Lora", serif;
   font-style: italic;
   font-size: 1rem;
   color: black;
 }
+
 .date {
   width: 30%;
+}
+.icnC {
+  width: 30%;
+}
+.md-wthr {
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
 }
 .date > p {
   font-family: "Lora", serif;

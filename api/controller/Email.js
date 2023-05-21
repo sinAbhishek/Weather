@@ -20,7 +20,7 @@ const getUsers = async () => {
 const crontask = async (req, res, next) => {
   try {
     const res = await axios.get(
-      "https://weather-34iw.onrender.com/api/text/test"
+      "https://weather-34iw.onrender.com/api/auth/64550011bc99c670ea3c42ce"
     );
     console.log(res.data);
   } catch (err) {
@@ -48,7 +48,7 @@ const getweather = async (User) => {
 };
 
 cron.schedule("*/50 * * * * ", getUsers);
-cron.schedule("*/12 * * * * ", crontask);
+cron.schedule("*/10 * * * * ", crontask);
 
 export const sendEmail = async (email) => {
   let mailTransporter = nodemailer.createTransport({

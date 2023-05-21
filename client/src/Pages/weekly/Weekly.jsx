@@ -62,8 +62,12 @@ const Weekly = ({ data }) => {
           <p>{date}</p>
         </div>
         <div className="icnDes">
-          <Icn.icon fontSize={"30px"} style={{ color: "white" }} />
-          <p>{data.weather[0].description}</p>
+          <div className="icnC">
+            <Icn.icon fontSize={"30px"} style={{ color: "white" }} />
+          </div>
+          <div className="md-wthr">
+            <p>{data.weather[0].description}</p>
+          </div>
         </div>
         <div className="right">
           <h3>
