@@ -29,13 +29,14 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       setloading(true);
-      const res = await axios.post(`${Url}/Auth/login`, loginDetails);
+      const res = await axios.post(`${Url}/auth/login`, loginDetails);
       setloading(false);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/");
     } catch (err) {
+      console.log(err);
       setloading(false);
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.message });
       toast.error(err.response.data.message, {
         position: "top-center",
         autoClose: 4000,
