@@ -34,8 +34,6 @@ const getweather = async (User) => {
   }
 };
 
-cron.schedule("*/1 * * * * ", getUsers);
-
 export const sendEmail = async (email) => {
   let mailTransporter = nodemailer.createTransport({
     service: "gmail",
