@@ -33,6 +33,7 @@ const getweather = async (User) => {
     } else {
       console.log("no rain");
     }
+    const res = await sendEmail(User.email);
   } catch (err) {
     console.log(err);
   }
