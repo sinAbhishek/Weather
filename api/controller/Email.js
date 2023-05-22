@@ -9,7 +9,7 @@ const router = express.Router();
 dotenv.config();
 const openapi = process.env.OpenApi;
 
-const getUsers = async () => {
+export const getUsers = async () => {
   try {
     const users = await User.find({ notifications: true });
     users && users.map((user) => getweather(user));
@@ -18,10 +18,6 @@ const getUsers = async () => {
   }
 };
 
-export const test = async (req, res, next) => {
-  console.log("hehe");
-  res.status(200).json({ response: "success" });
-};
 const getweather = async (User) => {
   try {
     const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${User.coordinates[0]}&lon=${User.coordinates[1]}&units=metric&appid=${openapi}`;
@@ -33,7 +29,6 @@ const getweather = async (User) => {
     } else {
       console.log("no rain");
     }
-    const res = await sendEmail(User.email);
   } catch (err) {
     console.log(err);
   }
