@@ -1,18 +1,20 @@
-import express from "express";
+import express, { response } from "express";
 import twilio from "twilio";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import cron from "node-cron";
 import User from "../model/User.js";
 import axios from "axios";
+import { createError } from "../util/error.js";
 const router = express.Router();
 dotenv.config();
 const openapi = process.env.OpenApi;
 
-export const getUsers = async () => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find({ notifications: true });
     users && users.map((user) => getweather(user));
+    res.send("hello");
   } catch (err) {
     console.log(err);
   }
