@@ -13,28 +13,41 @@ const openapi = process.env.OpenApi;
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find({ notifications: true });
+    const getweather = async (User) => {
+      const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${User.coordinates[0]}&lon=${User.coordinates[1]}&units=metric&appid=${openapi}`;
+      const temp = await axios.get(url);
+      const sky = temp.data.hourly[5].weather[0].main;
+      console.log(sky);
+      if (sky === "Rain") {
+        const res = sendEmail(User.email);
+        return res;
+      } else {
+        console.log("no rain");
+        res.send("no rain");
+      }
+    };
     users && users.map((user) => getweather(user));
-    res.send("hello");
   } catch (err) {
     console.log(err);
   }
 };
 
-const getweather = async (User) => {
-  try {
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${User.coordinates[0]}&lon=${User.coordinates[1]}&units=metric&appid=${openapi}`;
-    const temp = await axios.get(url);
-    const sky = temp.data.hourly[5].weather[0].main;
-    console.log(sky);
-    if (sky === "Rain") {
-      const res = await sendEmail(User.email);
-    } else {
-      console.log("no rain");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const getweather = async (User) => {
+//   try {
+//     const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${User.coordinates[0]}&lon=${User.coordinates[1]}&units=metric&appid=${openapi}`;
+//     const temp = await axios.get(url);
+//     const sky = temp.data.hourly[5].weather[0].main;
+//     console.log(sky);
+//     if (sky === "Rain") {
+//       const res = sendEmail(User.email);
+//       return res;
+//     } else {
+//       console.log("no rain");
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export const sendEmail = async (email) => {
   let mailTransporter = nodemailer.createTransport({
@@ -55,8 +68,10 @@ export const sendEmail = async (email) => {
     const res = mailTransporter.sendMail(mailDetails, function (err, data) {
       if (err) {
         console.log(err);
+        return err;
       } else {
         console.log("Email sent successfully");
+        return null;
       }
     });
   } catch (err) {
