@@ -316,9 +316,9 @@ const Home = () => {
     setnotification(!notification);
   };
   return (
-    <div className="main w-screen h-screen bg-slate-950 flex justify-center">
+    <div className="main w-screen h-screen relative bg-slate-950 flex justify-center">
       {Loading && (
-        <div className="loadAnim">
+        <div className=" bg-black z-50 loadAnim w-screen h-screen absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
           <BounceLoader
             color={"red"}
             loading={Loading}
