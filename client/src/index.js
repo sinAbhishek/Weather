@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AuthContextProvider } from './Hook/AuthContext.js';
-import App from './App';
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { AuthContextProvider } from "./Hook/AuthContext.js";
+import App from "./App";
+import "./index.css";
+import { ChakraProvider } from "@chakra-ui/react";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-  <AuthContextProvider>
-    <App />
-    </AuthContextProvider>
+    <ChakraProvider>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

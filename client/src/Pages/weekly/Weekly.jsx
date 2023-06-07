@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "../Icons/Icon";
-import "./weekly.css";
+// import "./weekly.css";
 const Weekly = ({ data }) => {
   const [Icn, seticon] = useState({ icon: Icon.clearSun });
   const [date, setdate] = useState("");
+  const [mon, setmon] = useState("");
   const Day = [
     "Sunday",
     "Monday",
@@ -12,6 +13,20 @@ const Weekly = ({ data }) => {
     "Thursday",
     "Friday",
     "Saturday",
+  ];
+  const month = [
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "November",
+    "December",
   ];
   const [day, setday] = useState("");
 
@@ -24,7 +39,8 @@ const Weekly = ({ data }) => {
       const dt = new Date(data.dt * 1000).getDate();
       const month = new Date(data.dt * 1000).getMonth() + 1;
       const dayno = new Date(data.dt * 1000).getDay();
-      setdate(dt + "/" + month);
+      setdate(dt);
+      setmon(month);
       setday(Day[dayno]);
     };
     data && call();
@@ -56,23 +72,30 @@ const Weekly = ({ data }) => {
   };
   return (
     <>
-      <div className="dailyWrapper">
-        <div className="date">
-          <p>{day}</p>
-          <p>{date}</p>
-        </div>
-        <div className="icnDes">
+      <div className="dailyWrapper w-full h-20 flex justify-between">
+        <div className="icnDes flex w-1/3 items-center">
           <div className="icnC">
-            <Icn.icon fontSize={"30px"} style={{ color: "white" }} />
+            <Icn.icon fontSize={"40px"} style={{ color: "white" }} />
           </div>
-          <div className="md-wthr">
-            <p>{data.weather[0].description}</p>
+          <div className=" text-white ml-2">
+            <p className=" text-white text-base md:text-xl inline-block">
+              {data.temp.max}
+            </p>
+            /
+            <p className="inline-block text-sm md:text-base text-slate-400">
+              {data.temp.min}
+            </p>
           </div>
         </div>
-        <div className="right">
-          <h3>
-            {data.temp.max}℃/{data.temp.min}℃
-          </h3>
+        <div className="date flex w-1/3 justify-center items-center">
+          <p className=" text-slate-400 mr-2">{date}</p>
+          <p className=" text-slate-400">{month[mon]}</p>
+        </div>
+
+        <div className="right w-1/3 flex justify-center items-center">
+          <div className="w-1/2 flex ">
+            <p className=" text-slate-300">{day}</p>
+          </div>
         </div>
       </div>
     </>

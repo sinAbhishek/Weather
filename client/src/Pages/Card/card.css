@@ -9,7 +9,9 @@
 }
 .icon,
 .main-des {
+  color: rgba(32, 34, 33, 0.431);
 }
+
 .bg-img {
   position: absolute;
   top: 0px;

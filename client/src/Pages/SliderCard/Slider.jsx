@@ -1,60 +1,88 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "../Icons/Icon";
-import "./slider.css";
 
-const Slider = ({ data, diff }) => {
+const Slider = ({ data, diff, timezone, sunset, sunrise }) => {
   const [time, settime] = useState("");
   const [Icn, seticon] = useState({ icon: Icon.clearSun });
   const [hour, sethour] = useState("");
   const [minute, setminute] = useState("");
+  const [Sunset, setsunset] = useState("");
+  const [Sunrise, setsunrise] = useState("");
   const [Day, setDay] = useState("");
   const convert = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   useEffect(() => {
     data && fn();
   }, [data, Day]);
-  useEffect(() => {
-    const call = () => {
-      console.log(hour);
-      if (hour < 6) {
-        setDay(false);
-      } else if (hour > 18) {
-        setDay(false);
-      } else {
-        setDay(true);
-      }
-    };
-    hour && call();
-  }, [hour]);
-  useEffect(() => {
-    console.log(diff);
-    const call = () => {
-      const time = new Date(data.dt * 1000).toTimeString().split(":");
 
-      if (diff != 100) {
-        const diffhr = Math.floor(diff / 60);
-        const diffmin = diff % 60;
-        console.log(time);
-        var hr = Number(time[0]) + diffhr;
-        var min = Number(time[1]) + diffmin;
-        if (hr < 0) {
-          sethour(hr + 24);
-          console.log(hr + 24);
+  useEffect(() => {
+    const call = () => {
+      const current = getTime(timezone, data.dt);
+      settime(current.hr + " " + current.meri);
+      const suns = getTime(data.timezone, sunset);
+      setsunset(suns.hr);
+      const sunr = getTime(data.timezone, sunrise);
+      setsunrise(sunr.hr + " " + sunr.meri);
+      console.log(suns.hr.slice(0, 1));
+      if (current.hr.length === 5) {
+        if (
+          Number(current.hr.slice(0, 2)) < Number(sunr.hr.slice(0, 1)) &&
+          current.meri === "AM"
+        ) {
+          setDay(false);
+        } else if (
+          Number(current.hr.slice(0, 2)) >= Number(suns.hr.slice(0, 1)) &&
+          Number(current.hr.slice(0, 2)) < 12 &&
+          current.meri === "PM"
+        ) {
+          setDay(false);
         } else {
-          sethour(hr);
-          console.log(hr);
+          setDay(true);
         }
       } else {
-        var hr = Number(time[0]);
-        var min = Number(time[1]);
-        sethour(hr);
+        if (
+          Number(current.hr.slice(0, 1)) < Number(sunr.hr.slice(0, 1)) &&
+          current.meri === "AM"
+        ) {
+          setDay(false);
+        } else if (
+          Number(current.hr.slice(0, 1)) >= Number(suns.hr.slice(0, 1)) &&
+          current.meri === "PM"
+        ) {
+          setDay(false);
+        } else {
+          setDay(true);
+        }
       }
     };
+    data && call();
+  }, [data]);
 
-    diff && call();
-  }, [diff]);
-  useEffect(() => {
-    settime(hour + ":" + "00");
-  }, [hour]);
+  const getTime = (timezone, string) => {
+    if (string) {
+      const date = new Date(string * 1000).toLocaleTimeString("en-US", {
+        timeZone: timezone,
+      });
+      if (date.length === 10) {
+        const time = { hr: date.slice(0, 4), meri: date.slice(8, 10) };
+        return time;
+      } else {
+        const time = { hr: date.slice(0, 5), meri: date.slice(9, 11) };
+        return time;
+      }
+    } else {
+      const date = new Date().toLocaleTimeString("en-US", {
+        timeZone: timezone,
+      });
+      if (date.length === 10) {
+        const time = { hr: date.slice(0, 4), meri: date.slice(8, 10) };
+        return time;
+      } else {
+        const time = { hr: date.slice(0, 5), meri: date.slice(9, 11) };
+        return time;
+      }
+    }
+  };
+
   const fn = () => {
     switch (data.weather[0].main) {
       case "Rain":
@@ -85,16 +113,17 @@ const Slider = ({ data, diff }) => {
     }
   };
   return (
-    <div className="slidericon">
+    <div className="slidericon flex justify-center items-center  h-32 bg-no-repeat bg-cover  rounded-md bg-[url(https://images.template.net/wp-content/uploads/2017/01/18062722/200-Blurred-Backgrounds-Free-Download.jpg)] ">
       {data && (
-        <div className="hourlyWrapper">
-          <div className="iconT">
-            <p>{data.temp}</p>
-            <Icn.icon fontSize={"30px"} style={{ color: "white" }} />
+        <div className="hourlyWrapper flex items-center justify-center  h-full ">
+          <div className="iconT flex flex-col items-center justify-center  h-full  ">
+            <p className=" text-xl text-white ">{data.temp}</p>
+            <Icn.icon fontSize={"40px"} style={{ color: "white" }} />
+            <p className=" italic text-gray-400">
+              {data.weather[0].description}
+            </p>
+            {time && <p className=" text-lg text-slate-100">{time}</p>}
           </div>
-
-          <p>{data.weather[0].description}</p>
-          {time && <p>{time}</p>}
         </div>
       )}
     </div>

@@ -7,15 +7,46 @@ import {
   WiWindy,
   WiTime1,
 } from "react-icons/wi";
-import "./card.css";
+
+// import "./card.css";
+import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const Card = ({ data, Day, diff }) => {
-  const [hour, sethour] = useState([]);
+  const [time, settime] = useState("");
+  const [sunset, setsunset] = useState("");
+  const [sunrise, setsunrise] = useState("");
   const [Icn, seticon] = useState({ icon: Icon.clearSun });
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  useEffect(() => {
+    const call = () => {
+      console.log(data);
+      const current = getTime(data.timezone);
+      settime(current.hr + " " + current.meri);
+      const suns = getTime(data.timezone, data.current.sunset);
+      setsunset(suns.hr + " " + suns.meri);
+      const sunr = getTime(data.timezone, data.current.sunrise);
+      setsunrise(sunr.hr + " " + sunr.meri);
+    };
+    data && call();
+  }, [data]);
   useEffect(() => {
     data && fn();
+    console.log(data);
   }, [data, Day]);
   const fn = () => {
-    switch (data.weather[0].main) {
+    switch (data.current.weather[0].main) {
       case "Rain":
         seticon({ icon: Icon.rain });
         break;
@@ -43,113 +74,77 @@ const Card = ({ data, Day, diff }) => {
         break;
     }
   };
-  useEffect(() => {
-    const run = () => {
-      call(data.sunrise);
-      call(data.sunset);
-      call(data.dt);
-    };
-    diff && run();
-  }, [data, diff]);
 
-  useEffect(() => {
-    sethour([]);
-  }, [data]);
-  const call = (data) => {
-    const time = new Date(data * 1000).toTimeString().split(":");
-
-    if (diff != 100) {
-      const diffhr = Math.floor(diff / 60);
-      const diffmin = diff % 60;
-
-      var hr = Number(time[0]) + diffhr;
-      var min = Number(time[1]) + diffmin;
-      if (hr < 0) {
-        if (min < 0) {
-          min = min * -1;
-          sethour((prev) => [...prev, hr + 24 + ":" + min]);
-        } else {
-          sethour((prev) => [...prev, hr + 24 + ":" + min]);
-        }
-      } else if (hr > 24) {
-        if (min < 0) {
-          min = min * -1;
-          sethour((prev) => [...prev, hr - 24 + ":" + min]);
-        } else {
-          sethour((prev) => [...prev, hr - 24 + ":" + min]);
-        }
+  const getTime = (timezone, string) => {
+    if (string) {
+      const date = new Date(string * 1000).toLocaleTimeString("en-US", {
+        timeZone: timezone,
+      });
+      if (date.length === 10) {
+        const time = { hr: date.slice(0, 4), meri: date.slice(8, 10) };
+        return time;
       } else {
-        if (min < 0) {
-          min = min * -1;
-          sethour((prev) => [...prev, hr + ":" + min]);
-        } else {
-          sethour((prev) => [...prev, hr + ":" + min]);
-        }
+        const time = { hr: date.slice(0, 5), meri: date.slice(9, 11) };
+        return time;
       }
     } else {
-      var hr = Number(time[0]);
-      var min = Number(time[1]);
-      sethour((prev) => [...prev, hr + ":" + min]);
+      const date = new Date().toLocaleTimeString("en-US", {
+        timeZone: timezone,
+      });
+      if (date.length === 10) {
+        const time = { hr: date.slice(0, 4), meri: date.slice(8, 10) };
+        return time;
+      } else {
+        const time = { hr: date.slice(0, 5), meri: date.slice(9, 11) };
+        return time;
+      }
     }
   };
 
   return (
-    <div className="currentWrapper">
+    <div className="currentWrapper h-full w-full flex justify-between">
       <div
-        className="bg-img"
-        style={{
-          backgroundImage: Day ? "url(images/sun.jpg)" : "url(images/moon.jpg)",
-          backgroundSize: "cover",
-        }}
-      ></div>
-      {data && (
-        <div className="icon">
-          <Icn.icon
-            fontSize={"100px"}
-            color="white"
-            style={{ margin: "0rem auto" }}
-          />
-          <p style={{ color: Day ? "black" : "#27ace9" }}>
-            {data.weather[0].description}
-          </p>
-          <h2 style={{ color: Day ? "black" : "#27ace9" }}>{data.temp}℃</h2>
-        </div>
-      )}
-      {data && (
-        <div className="temp">
-          <div className="main-des">
-            <WiThermometer fontSize={"40px"} color="white" />
+        style={{ backgroundPosition: "center center" }}
+        className=" w-full h-full bg-no-repeat bg-cover  rounded-md relative bg-[url(https://wallpaperaccess.com/full/4157519.jpg)]"
+      >
+        <div
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.529)" }}
+          className="blur absolute top-0 bottom-0 left-0 right-0 z-20 w-full h-full backdrop-blur-md "
+        ></div>
+        {data && (
+          <div className="icon pt-4 absolute top-0 bottom-0 left-0 right-0 z-30 ">
+            <Icn.icon fontSize={"100px"} color="white" />
+            <h2 className=" ml-4 text-2xl md:text-4xl text-slate-100">
+              {" "}
+              {data.current.temp}℃
+            </h2>
+            <p className="ml-4 mt-4 italic text-slate-100">
+              {data.current.weather[0].description}
+            </p>
             <h5>
-              Feels Like: <p>{data.feels_like}</p>
+              <p className="ml-4 font-semibold text-slate-300 text-base md:text-xl mt-4">
+                {time}
+              </p>
             </h5>
+            <hr
+              style={{ height: "1px" }}
+              className=" w-4/5 bg-slate-400 mx-auto mt-4"
+            />
+            <div className="main-des m-2">
+              <div className="flex">
+                <div className="flex items-center">
+                  <WiSunrise size={"40px"} color="#e8d333" />
+                  <p className="ml-4 font-semibold text-slate-100">{sunrise}</p>
+                </div>
+                <div className="flex items-center ml-8">
+                  <WiSunset size={"40px"} color="#fa7211" />
+                  <p className="ml-4 font-semibold text-slate-100">{sunset}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="main-des">
-            <WiWindy fontSize={"40px"} color="white" />
-            <h5>
-              Wind: <p>{data.wind_speed}</p>
-            </h5>
-          </div>
-
-          <div className="main-des">
-            <WiSunrise fontSize={"40px"} color="white" />
-            <h5>
-              Sunrise: <p>{hour[0]}</p>
-            </h5>
-          </div>
-          <div className="main-des">
-            <WiSunset fontSize={"40px"} color="white" />
-            <h5>
-              Sunset: <p>{hour[1]}</p>
-            </h5>
-          </div>
-          <div className="main-des">
-            <WiTime1 fontSize={"35px"} color="white" />
-            <h5>
-              Current Time: <p>{hour[2]}</p>
-            </h5>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
