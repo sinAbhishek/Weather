@@ -363,7 +363,7 @@ const Home = () => {
               <Card data={Weather} Day={Day} diff={diff} />
             </div>
           </div>
-          <p className=" text-lg mb-2 text-slate-300 font-semibold">
+          <p className="hideTitle text-lg mb-2 text-slate-300 font-semibold">
             Daily forecast
           </p>
           <div className="undersec2 w-6/12 h-full  bg-no-repeat bg-cover  rounded-md relative bg-[url(https://wallpaperaccess.com/full/4157519.jpg)]">

@@ -1,7 +1,14 @@
+.hideTitle {
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   .secOne {
     flex-direction: column;
     height: 100vh !important;
+  }
+  .hideTitle {
+    display: block;
   }
   .undersec1 {
     height: 50%;
@@ -21,6 +28,9 @@
   }
 }
 @media only screen and (max-width: 500px) {
+  .hideTitle {
+    display: block;
+  }
   .secOne {
     flex-direction: column;
     height: 100vh !important;
