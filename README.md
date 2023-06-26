@@ -4,6 +4,7 @@
 Weathershield is MERN stack rain alert notification web app which notifies you when its about to rain in your area.
 
 
+
 # Technologies Used
 
 Backend server: Node JS,Express JS and nodemailer for sending email notifications.
@@ -17,7 +18,7 @@ Database: Mongodb
 https://weathershield.netlify.app
 
 # Preview
-<img src="https://github.com/sinAbhishek/Weather/assets/127949220/c56f1e64-2bd4-48cc-8ba2-41872513f107" width="900px" height="450px" />
+<img src="https://github.com/sinAbhishek/Weather/assets/127949220/c1f40bfb-f4b2-4ba6-8939-fc431f1217b3" width="900px" height="450px" />
 
 
 
